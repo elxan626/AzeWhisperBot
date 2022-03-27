@@ -14,8 +14,8 @@ plugins = dict(
 )
 
 # logging.basicConfig(level=logging.DEBUG)
-print('>>> BOT STARTED')
+print('>>> BOT BAŞLADI')
 Client("ezWhisperBot", plugins=plugins).run()
 with open('data.json', 'w') as f:
     json.dump(whispers, f)
-print('\n>>> BOT STOPPED')
+print('\n>>> BOT DAYANDIRILDI')
