@@ -1,5 +1,5 @@
 """
-ezWhisperBot, Telegram Bot for sending whisper messages
+AzeWhisperBot, Telegramda gizli mesaj göndərmək üçün bot
 Copyright (C) 2021  Dash Eclipse
 
 This program is free software: you can redistribute it and/or modify
@@ -46,18 +46,18 @@ async def answer_iq(_, iq: InlineQuery):
     split = query.split(' ', 1)
     if query == '' or len(query) > ANSWER_CALLBACK_QUERY_MAX_LENGTH \
             or (query.startswith('@') and len(split) == 1):
-        title = f"{emoji.FIRE} Write a whisper message"
-        content = ("**Send whisper messages through inline mode**\n\n"
-                   "Usage: `@ezWhisperBot [@username|@] text`")
-        description = "Usage: @ezWhisperBot [@username|@] text"
+        title = f"{emoji.FIRE} Gizli mesaj yaz"
+        content = ("**Daxili rejim vasitəsilə gizli mesajları göndərin**\n\n"
+                   "İstifadəsi: `@AzeWhisperBot [@username|@] mesaj`")
+        description = "İstifadəsi: @AzeWhisperBot [@username|@] mesaj"
         button = InlineKeyboardButton(
-            "Learn more...",
-            url="https://t.me/ezWhisperBot?start=learn"
+            "Daha Ətraflı...",
+            url="https://t.me/AzeWhisperBot?start=learn"
         )
     elif not query.startswith('@'):
-        title = f"{emoji.EYE} Whisper once to the first one who open it"
+        title = f"{emoji.EYE} Mesajı ilk açana pıçılda"
         content = (
-            f"{emoji.EYE} The first one who open the whisper can read it"
+            f"{emoji.EYE} İlk açan pıçıltını oxuya bilər"
         )
         description = f"{emoji.SHUSHING_FACE} {query}"
         button = InlineKeyboardButton(
@@ -67,15 +67,15 @@ async def answer_iq(_, iq: InlineQuery):
     else:
         # Python 3.8+
         u_target = 'anyone' if (x := split[0]) == '@' else x
-        title = f"{emoji.LOCKED} A whisper message to {u_target}"
-        content = f"{emoji.LOCKED} A whisper message to {u_target}"
+        title = f"{emoji.LOCKED} {u_target} üçün gizli mesaj"
+        content = f"{emoji.LOCKED} {u_target} üçün gizli mesaj"
         description = f"{emoji.SHUSHING_FACE} {split[1]}"
         button = InlineKeyboardButton(
             f"{emoji.LOCKED_WITH_KEY} show message",
             callback_data="show_whisper"
         )
-    switch_pm_text = f"{emoji.INFORMATION} Learn how to send whispers"
-    switch_pm_parameter = "learn"
+    switch_pm_text = f"{emoji.INFORMATION} Gizli mesaj göndərməyi öyrən"
+    switch_pm_parameter = "öyrən"
     await iq.answer(
         results=[
             InlineQueryResultArticle(
@@ -119,8 +119,8 @@ async def answer_cq(_, cq: CallbackQuery):
     inline_message_id = cq.inline_message_id
     if not inline_message_id or inline_message_id not in whispers:
         try:
-            await cq.answer("Can't find the whisper text", show_alert=True)
-            await cq.edit_message_text(f"{emoji.NO_ENTRY} invalid whisper")
+            await cq.answer("Gizli mesaj tapılmadı", show_alert=True)
+            await cq.edit_message_text(f"{emoji.NO_ENTRY} səhv pıçıltı")
         except (MessageIdInvalid, MessageNotModified):
             pass
         return
@@ -140,7 +140,7 @@ async def answer_cq(_, cq: CallbackQuery):
         if not receiver_uname:
             await read_the_whisper(cq)
             return
-        await cq.answer("This is not for you", show_alert=True)
+        await cq.answer("Bu sənin üçün deyil", show_alert=True)
 
 
 async def read_the_whisper(cq: CallbackQuery):
@@ -159,7 +159,7 @@ async def read_the_whisper(cq: CallbackQuery):
     try:
         t_emoji = emoji.UNLOCKED if receiver_uname else emoji.EYES
         await cq.edit_message_text(
-            f"{t_emoji} {user_mention} read the message"
+            f"{t_emoji} {user_mention} mesajı oxudu"
         )
     except (MessageIdInvalid, MessageNotModified):
         pass
