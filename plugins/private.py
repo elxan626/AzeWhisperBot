@@ -25,20 +25,20 @@ from pyrogram.types import (Message,
 from data import whispers
 
 LEARN_TEXT = (
-    "This bot works only in inline mode, a example use would be like "
-    "this:\n\n"
-    "- Write a whisper to @username\n"
-    "`@ezWhisperBot @username some text here`\n\n"
-    "- Write a whisper which anyone can read it multiple times\n"
-    "`@ezWhisperBot @ some text here`\n\n"
-    "- Whisper to the first one who open it (can also be used in PM)\n"
-    "`@ezWhisperBot some text here`"
+    "Bu bot yalnız daxili rejimdə işləyir, istifadə nümunəsi kimi olardı"
+    "belə:\n\n"
+    "- @username-ə mesaj yaz\n"
+    "`@AzeWhisperBot @username hansısa mesaj`\n\n"
+    "- Hər kəsin dəfələrlə oxuya biləcəyi bir pıçıltı yazın,\n"
+    "`@AzeWhisperBot @username hansısa mesaj`\n\n"
+    "- Onu ilk açana pıçıldayın\n"
+    "`@AzeWhisperBot hansısa mesaj`"
 )
 LEARN_REPLY_MARKUP = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(
-                "Next",
+                "Növbəti",
                 callback_data="learn_next"
             )
         ]
