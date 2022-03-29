@@ -49,8 +49,8 @@ DEFAULT_TEXT = (
     "Bu bot sizə pıçıltı mesajları göndərməyə imkan verir, "
     "yalnız daxili rejimdə işləyir\n\n"
     "[Source Code](https://github.com/dashezup/ezWhisperBot)"
-    " | [Developer](https://t.me/dashezup)"
-    " | [Support Chat](https://t.me/ezupdev)"
+    " | [👨‍💻 Developer](https://t.me/muellime)"
+    " | [📣 Support](https://t.me/muellime)"
 )
 DEFAULT_REPLY_MARKUP = InlineKeyboardMarkup(
     [
