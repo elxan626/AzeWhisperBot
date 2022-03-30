@@ -56,17 +56,17 @@ DEFAULT_REPLY_MARKUP = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(
-                "Select a Chat to Try",
+                "Yoxlamaq üçün qrup seçin",
                 switch_inline_query=""
             ),
             InlineKeyboardButton(
-                "Try in This Chat",
+                "Bu qrupda yoxla",
                 switch_inline_query_current_chat=""
             )
         ],
         [
             InlineKeyboardButton(
-                "My Whispers",
+                "Mənim pıçıltılarım",
                 callback_data="list_whispers"
             )
         ]
@@ -100,7 +100,7 @@ async def show_main_page(_, cq: CallbackQuery):
         reply_markup=DEFAULT_REPLY_MARKUP
     )
     await cq.answer(
-        f"{emoji.ROBOT} Now you may try it in inline mode"
+        f"{emoji.ROBOT} İndi siz bunu daxili rejimdə yoxlayın"
         if cq.data == "learn_next"
         else None
     )
@@ -113,20 +113,20 @@ async def list_whispers(_, cq: CallbackQuery):
         i for i in whispers.values() if i['sender_uid'] == user_id
     ]
     if len(user_whispers) == 0:
-        text = "You don't have any whispers"
+        text = "Sənin heç bir pıçıltın yoxdur"
     else:
-        text = f"You have **{len(user_whispers)}** whispers"
+        text = f"Sizin **{len(user_whispers)}** pıçıltılarınız var"
     reply_markup = InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
-                    f"{emoji.WASTEBASKET}  Delete My Whispers",
+                    f"{emoji.WASTEBASKET}  Pıçıltılarımı sil",
                     callback_data="delete_my_whispers"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    f"{emoji.BACK_ARROW}  Back to Main Page",
+                    f"{emoji.BACK_ARROW}  Əsas səhifə",
                     callback_data="start"
                 )
             ]
@@ -148,7 +148,7 @@ async def delete_my_whispers(_, cq: CallbackQuery):
         if v['sender_uid'] == user_id
     ]
     if len(deleted_whispers) == 0:
-        await cq.answer("You don't have any whispers")
+        await cq.answer("Sənin heç bir pıçıltın yoxdur")
     else:
         await cq.answer(f"Removed {len(deleted_whispers)} whispers")
         utcnow = datetime.utcnow().strftime('%F %T')
